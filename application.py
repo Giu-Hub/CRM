@@ -15,10 +15,6 @@ def view_accounts():
         {
             "name": "BMB",
             "vat_code": "06750531219"
-        },
-        {
-            "name": "Paladeri",
-            "vat_code": "01363400290"
         }
     ]
 

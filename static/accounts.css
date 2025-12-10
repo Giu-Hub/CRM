@@ -12,13 +12,12 @@ body {
     cursor: pointer;
 }
 
-#account-container {
-    /* position: relative; */
+/* #account-container {
     display: block;
     height: 20vh;
     width: 10vw;
     border: .1rem solid rgba(70, 70, 70, .8);
-}
+} */
 
 /* https://stackoverflow.com/questions/526035/how-can-i-position-my-div-at-the-bottom-of-its-container */
 /* https://stackoverflow.com/questions/11811265/center-an-a-element */
