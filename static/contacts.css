@@ -30,8 +30,7 @@ html {
 .contact-info {
     display: inline-block;
     height: 100%;
-    vertical-align: top;
-    margin-top: .5vh;
+    vertical-align: middle;
     color: #000;
     text-decoration: none;
 }
