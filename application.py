@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from flask_cors import CORS
 from markupsafe import escape
 import requests
 import json
@@ -33,7 +34,7 @@ def view_account_by_vat_code(vat_code):
 def create_account():
     return render_template("create_account.html")
 
-@app.route("/handle_creating_account", methods=['POST'])
+@app.route("/api/create_account", methods=['POST'])
 def handle_creating_account():
     with open("credentials.json") as file:
         credentials = json.load(file)

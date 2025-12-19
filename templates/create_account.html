@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <title>CRM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='create_account.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='create_account.js') }}"></script>
 </head>
 <body>
-    <!-- <form method="post" action="{{ url_for('handle_creating_account') }}"> -->
+    <div id="vat-code-container">
         <label for="vat_code">Vat code</label>
         <input id="vat_code" name="vat_code" autocomplete="off" type="text">
-    <!-- </form> -->
+    </div>
 </body>
 </html>
