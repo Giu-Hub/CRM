@@ -1,9 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const vatCode = document.getElementById("vat_code");
+    // https://stackoverflow.com/questions/7410063/how-can-i-listen-to-the-form-submit-event-in-javascript
 
-    vatCode.addEventListener("keypress", (event) => {
-        if (event.key == "Enter") {
-            fetch("https://webhook.site/9e4cb56f-46c0-4ede-8b78-03f45150a2d8")
-        }
+    const form = document.getElementById("vat-code-form");
+
+    form.addEventListener("submit", () => {
+        const url = "http://localhost:5000/api/create_account"
+
+        // https://flask.palletsprojects.com/en/stable/patterns/javascript/
+        let data = new FormData()
+
+        data.append("vatCode", "1515151")
+        
+        fetch(url)
+        .then(res => res.json())
     })
 })

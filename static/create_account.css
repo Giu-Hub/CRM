@@ -5,12 +5,33 @@ body {
     height: 100vh;
 }
 
+html {
+    font-family: sans-serif;
+}
+
 /* https://www.reddit.com/r/webdev/comments/1diix0e/centering_a_div_nowadays_what_are_the_best/ */
 
-#vat-code-container {
+#form-container {
     border: .1rem solid rgba(80, 80, 80, .4);
     border-radius: .5rem;
     box-shadow: .5rem .5rem .5rem rgba(70, 70, 70, .4);
-    height: 25%;
-    width: 25%;
+    width: 20%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5vh;
+    margin: 3vh .5vw;
+}
+
+input {
+    background-color: rgba(185, 185, 185, .5);
+    border: none;
+    border-radius: .3rem;
+    height: 3.5vh;
+}
+
+input[type="text"]:focus {
+    outline-color: rgba(0, 0, 0, .8);
 }

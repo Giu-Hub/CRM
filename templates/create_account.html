@@ -6,9 +6,12 @@
     <script type="text/javascript" src="{{ url_for('static', filename='create_account.js') }}"></script>
 </head>
 <body>
-    <div id="vat-code-container">
-        <label for="vat_code">Vat code</label>
-        <input id="vat_code" name="vat_code" autocomplete="off" type="text">
+    <div id="form-container">
+        <form id="vat-code-form">
+            <label for="vat_code">Vat code</label>
+            <input id="vat_code" name="vat_code" autocomplete="off" type="text" required>
+            <input type="submit" value="Insert">
+        </form>
     </div>
 </body>
 </html>

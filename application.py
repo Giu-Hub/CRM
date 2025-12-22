@@ -34,23 +34,23 @@ def view_account_by_vat_code(vat_code):
 def create_account():
     return render_template("create_account.html")
 
-@app.route("/api/create_account", methods=['POST'])
+@app.route("/api/create_account", methods=['POST', 'GET'])
 def handle_creating_account():
-    with open("credentials.json") as file:
-        credentials = json.load(file)
+    print('CJNSJC')
 
-    vat_code = request.form["vat_code"]
-    
-    url = f"https://test.company.openapi.com/IT-advanced/{vat_code}"
-    headers = {
-        "Authorization": f"Bearer {credentials["token"]}",
-        "Accept": "application/json"
-    }
-    response = requests.get(
-        url = url,
-        headers = headers
-    )
-    return response.content
+    # with open("credentials.json") as file:
+    #     credentials = json.load(file)
+
+    # url = f"https:/test.company.openapi.com/IT-advanced/{vat_code/}"
+    # headers = {
+    #     "Authorization": f"Bearer {credentials["token"]}",
+    #     "Accept": "application/json"
+    # }
+    # response = requests.get(
+    #     url = url,
+    #     headers = headers
+    # )
+    return 'ADSJNSUCB'
 
 @app.route("/check_tax_code")
 def check_tax_code():
