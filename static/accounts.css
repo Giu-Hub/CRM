@@ -30,7 +30,7 @@ html {
 .account-info {
     display: inline-block;
     height: 60%;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 .account-name {

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
-from flask_cors import CORS
 from markupsafe import escape
+from queries import insert_account
 import requests
 import json
 
@@ -34,27 +34,39 @@ def view_account_by_vat_code(vat_code):
 def create_account():
     return render_template("create_account.html")
 
-@app.route("/api/create_account", methods=['POST', 'GET'])
+@app.route("/api/create_account", methods=["POST"])
 def handle_creating_account():
-    print('CJNSJC')
+    vatCode = request.form["vatCode"]
 
-    # with open("credentials.json") as file:
-    #     credentials = json.load(file)
+    # https://stackoverflow.com/questions/20199126/reading-json-from-a-file
+    with open("credentials.json") as file:
+        credentials = json.load(file)
 
-    # url = f"https:/test.company.openapi.com/IT-advanced/{vat_code/}"
-    # headers = {
-    #     "Authorization": f"Bearer {credentials["token"]}",
-    #     "Accept": "application/json"
-    # }
-    # response = requests.get(
-    #     url = url,
-    #     headers = headers
-    # )
-    return 'ADSJNSUCB'
+    url = f"https://test.company.openapi.com/IT-start/{vatCode}"
 
-@app.route("/check_tax_code")
-def check_tax_code():
-    print("Hello")
+    headers = {
+        "Authorization": f"Bearer {credentials['token']}",
+        "Accept": "application/json"
+    }
+    response = requests.get(
+        url = url,
+        headers = headers
+    )
+
+    response_json = response.json()
+
+    data = response_json.get("data")[0]
+
+    fields = dict()
+
+    fields["vatCode"] = data.get("vatCode")
+    fields["companyName"] = data.get("companyName")
+    fields["streetName"] = data.get("address").get("registeredOffice").get("streetName")
+    fields["region"] = data.get("address").get("registeredOffice").get("region").get("description")
+
+    statusCode = insert_account(fields)
+
+    return statusCode
 
 @app.route("/contacts")
 def view_contacts():

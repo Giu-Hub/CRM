@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+/* https://www.reddit.com/r/webdev/comments/1diix0e/centering_a_div_nowadays_what_are_the_best/ */
+
+#form-container {
+    border: .1rem solid rgba(80, 80, 80, .4);
+    border-radius: .5rem;
+    box-shadow: .5rem .5rem .5rem rgba(70, 70, 70, .4);
+    width: 50%;
+    height: 35vh;
+}
+
+form {
+    margin: 0;
+}
+
+form > ul {
+    width: 95%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+form > ul > li {
+    width: 49%;
+    display: inline-block;
+    padding: .5vh 0;
+    align-content: center;
+}
+
+ul li > * {
+    width: 95%;
+}
+
+input {
+    background-color: rgba(185, 185, 185, .5);
+    border: none;
+    border-radius: .3rem;
+    height: 3.5vh;
+    width: 90%;
+}
+
+input[type="text"]:focus {
+    outline-color: rgba(0, 0, 0, .8);
+}
+
+input[type="submit"] {
+    margin: 5vh auto 0 auto;
+    display: block;
+} 
