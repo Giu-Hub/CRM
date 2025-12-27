@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from markupsafe import escape
-from queries import insert_account
+from queries import insert_account, get_contacts
 import requests
 import json
 
@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    insert_account()
     return render_template("index.html")
 
 @app.route("/accounts")

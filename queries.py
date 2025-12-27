@@ -1,16 +1,25 @@
 import sqlite3
 
-DATABASE = '../crm.db'
+DATABASE = '../crm'
 
-def insert_account(fields):
+def insert_account():
     connection = sqlite3.connect(DATABASE)
 
     cursor = connection.cursor()
 
-    # https://www.geeksforgeeks.org/python/using-sqlite-aggregate-functions-in-python/
+    # https://stackoverflow.com/questions/30039451/sqlite-insert-in-flask
 
-    # Fai la query di INSERT
-    # Se andato a buon fine ritorna 201
-    # Altrimenti cercare un errore di ritorno quando fallisce 503
+    cursor.execute('INSERT INTO contacts (vat_code, company_name, region) VALUES (IT123, Giuseppe, Campania)',
+                   ( 'IT123','BMB', 'Campania' ))
+    
+    return '201'
 
-    return '200'
+def get_contacts():
+    connection = sqlite3.connect(DATABASE)
+
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM Account')
+    res = cursor.fetchall()
+    cursor.close()
+
+    print(res)

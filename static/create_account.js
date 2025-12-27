@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(res => res.text())
         .then(body => {
-            if (body === '200') {
+            if (body === '201') {
                 alert("Account created successfully");
             }
             else {
