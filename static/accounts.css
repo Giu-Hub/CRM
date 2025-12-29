@@ -7,9 +7,16 @@ html {
     font-family: sans-serif;
 }
 
+.company-logo {
+    display: inline-block;
+    width: 25%;
+}
+
 #accounts-container {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Basic_concepts */
+    /* https://stackoverflow.com/questions/52861086/why-does-minmax0-1fr-work-for-long-elements-while-1fr-doesnt */
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 2vh .7vw;
 }
 
@@ -30,11 +37,21 @@ html {
 .account-info {
     display: inline-block;
     height: 60%;
+    width: 70%;
     vertical-align: top;
 }
 
 .account-name {
     font-weight: bold;
+}
+
+p {
+    /* https://stackoverflow.com/questions/486563/overflowhidden-dots-at-the-end */
+    margin: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
 }
 
 .actions {

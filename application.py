@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from markupsafe import escape
-from queries import insert_account, get_contacts
+from queries import insert_account, get_accounts
 import requests
 import json
 
@@ -8,28 +8,22 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    insert_account()
     return render_template("index.html")
 
 @app.route("/accounts")
 def view_accounts():
-    accounts = [
-        {
-            "name": "BMB",
-            "vat_code": "06750531219"
-        }
-    ]
+    accounts = get_accounts()
 
     return render_template("accounts.html", accounts=accounts)
 
-@app.route("/view_account/<string:vat_code>")
-def view_account_by_vat_code(vat_code):
-    account_retrieved = {
-        "name": "Paolo Coppola",
-        "vat_code": vat_code
-    }
+# @app.route("/view_account/<string:vat_code>")
+# def view_account_by_vat_code(vat_code):
+#     account_retrieved = {
+#         "name": "Paolo Coppola",
+#         "vat_code": vat_code
+#     }
     
-    return render_template("view_account_by_vat_code.html", account=account_retrieved)
+#     return render_template("view_account_by_vat_code.html", account=account_retrieved)
 
 @app.route("/create_account")
 def create_account():
@@ -79,6 +73,12 @@ def create_contact(vat_code):
 
 @app.route("/contacts/<string:vat_code>")
 def view_contacts_by_vat_code(vat_code):
+    # Query Get Contact
+
+    # Leva escape
+    # Aggiungi render_template
+    # Vedi contacts.html e contacts.css
+    
     return escape(vat_code)
 
 if __name__ == "__main__":
