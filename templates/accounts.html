@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='accounts.css') }}">
 </head>
 <body>
-    <svg id="back-arrow" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#1f1f1f"><path d="m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z"/></svg>
-    2 risultati
+    <!-- <svg id="back-arrow" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#1f1f1f"><path d="m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z"/></svg> -->
+    <h3 id="accounts-count">{{ accounts | length }} {% if accounts | length > 1 %} accounts {% else %} account {% endif %}</h3>
     
     <div id="accounts-container">
         {% for account in accounts %}
@@ -15,7 +15,7 @@
                 <svg class="company-logo" xmlns="http://www.w3.org/2000/svg" height="65px" viewBox="0 -960 960 960" width="65px" fill="#1f1f1f"><path d="M120-120v-555h165v-165h390v330h165v390H533v-165H427v165H120Zm60-60h105v-105H180v105Zm0-165h105v-105H180v105Zm0-165h105v-105H180v105Zm165 165h105v-105H345v105Zm0-165h105v-105H345v105Zm0-165h105v-105H345v105Zm165 330h105v-105H510v105Zm0-165h105v-105H510v105Zm0-165h105v-105H510v105Zm165 495h105v-105H675v105Zm0-165h105v-105H675v105Z"/></svg>
                 <div class="account-info">
                     <div class="account-name">
-                        <p>{{ account['company_name'] }}</p>
+                        <a href="{{ url_for('view_account_by_vat_code', vat_code=account['vat_code']) }}"><p>{{ account['company_name'] }}</p></a>
                     </div>
                     <div>
                         <p>{{ account['vat_code'] }}</p>

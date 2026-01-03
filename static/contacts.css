@@ -7,39 +7,53 @@ html {
     font-family: sans-serif;
 }
 
+#contacts-count {
+    text-align: center;
+}
+
+.contact-logo {
+    display: inline-block;
+    width: 25%;
+}
+
 #contacts-container {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Basic_concepts */
+    /* https://stackoverflow.com/questions/52861086/why-does-minmax0-1fr-work-for-long-elements-while-1fr-doesnt */
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 2vh .7vw;
 }
+
+/* #back-arrow:hover {
+    cursor: pointer;
+} */
 
 .contact-container {
     border: .1rem solid rgba(80, 80, 80, .4);
     border-radius: .5rem;
+    height: 16vh;
 }
 
 .contact-container:hover {
     box-shadow: .3rem .3rem .5rem rgba(50, 50, 50, .4);
 }
 
-.contact-name {
-    font-weight: bold;
-    text-decoration: none;
-}
-
 .contact-info {
     display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    color: #000;
-    text-decoration: none;
+    height: 60%;
+    width: 70%;
+    vertical-align: top;
 }
 
-#contacts-count {
-    text-align: center;
-    color: rgba(110, 110, 110, .8);
+.contact-name {
+    font-weight: bold;
 }
 
-.logo-container {
-    text-decoration: none;
+p {
+    /* https://stackoverflow.com/questions/486563/overflowhidden-dots-at-the-end */
+    margin: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
 }

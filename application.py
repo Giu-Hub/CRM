@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from markupsafe import escape
-from queries import insert_account, get_accounts
+from queries import insert_account, insert_contact, get_accounts, get_contacts, view_contact_by_vatcode
 import requests
 import json
 
@@ -16,14 +16,37 @@ def view_accounts():
 
     return render_template("accounts.html", accounts=accounts)
 
-# @app.route("/view_account/<string:vat_code>")
-# def view_account_by_vat_code(vat_code):
-#     account_retrieved = {
-#         "name": "Paolo Coppola",
-#         "vat_code": vat_code
-#     }
+@app.route("/view_account/<string:vat_code>")
+def view_account_by_vat_code(vat_code):
+    # Query Account by VAT
+
+    account_retrieved = {
+        "name": "Paolo Coppola",
+        "vat_code": vat_code
+    }
     
-#     return render_template("view_account_by_vat_code.html", account=account_retrieved)
+    return render_template("view_account_by_vat_code.html", account=account_retrieved)
+
+@app.route("/api/create_contact", methods=["POST"])
+def handle_creating_contact():
+    firstName = request.form["firstName"]
+    lastName = request.form["lastName"]
+    taxCode = request.form["taxCode"]
+    email = request.form["email"]
+    phone = request.form["phone"]
+    vatCode = request.form["vatCode"]
+
+    fields = {
+        "firstName": firstName,
+        "lastName": lastName,
+        "taxCode": taxCode,
+        "email": email,
+        "phone": phone,
+        "vatCode": vatCode,
+    }
+    statusCode = insert_contact(fields)
+
+    return statusCode
 
 @app.route("/create_account")
 def create_account():
@@ -65,7 +88,9 @@ def handle_creating_account():
 
 @app.route("/contacts")
 def view_contacts():
-    return render_template("contacts.html")
+    contacts = get_contacts()
+
+    return render_template("contacts.html", contacts=contacts)
 
 @app.route("/create_contact/<string:vat_code>")
 def create_contact(vat_code):
@@ -73,13 +98,9 @@ def create_contact(vat_code):
 
 @app.route("/contacts/<string:vat_code>")
 def view_contacts_by_vat_code(vat_code):
-    # Query Get Contact
-
-    # Leva escape
-    # Aggiungi render_template
-    # Vedi contacts.html e contacts.css
+    contacts = view_contact_by_vatcode(vat_code)
     
-    return escape(vat_code)
+    return render_template("contacts.html", contacts=contacts)
 
 if __name__ == "__main__":
     app.run(debug = True)
