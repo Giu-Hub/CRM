@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CRM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='view_details_contact.css') }}">
+</head>
+<body>
+    <div id="contact-container">
+        <ul>
+            <li>
+                <label for="first-name">First name</label>
+                <p>{{ contact['first_name'] }}</p>
+            </li>
+            <li>
+                <label for="last-name">Last name</label>
+                <p>{{ contact['last_name'] }}</p>
+            </li>
+            <li>
+                <label for="tax-code">Tax code</label>
+                <p>{{ contact['tax_code'] }}</p>
+            </li>
+            <li>
+                <label for="email">Email</label>
+                <p>{{ contact['email'] }}</p>
+            </li>
+            <li>
+                <label for="phone">Phone</label>
+                <p>{{ contact['phone'] }}</p>
+            </li>
+            <li>
+                <label for="phone">Company Name</label>
+                <p>{{ contact['company_name'] | safe }}</p>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

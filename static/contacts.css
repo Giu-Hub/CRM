@@ -43,10 +43,15 @@ html {
     height: 60%;
     width: 70%;
     vertical-align: top;
+    & > a {
+        text-decoration: none;
+    }
 }
 
 .contact-name {
     font-weight: bold;
+    text-decoration: none;
+    color: #000;
 }
 
 p {

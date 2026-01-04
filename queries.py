@@ -82,7 +82,7 @@ def get_contacts():
     connection.row_factory = sqlite3.Row
 
     cursor = connection.cursor()
-    cursor.execute('''SELECT first_name, last_name, company_name 
+    cursor.execute('''SELECT first_name, last_name, company_name , tax_code
                    FROM contacts c
                    JOIN account a
                    ON c.vat_code = a.vat_code
@@ -93,6 +93,23 @@ def get_contacts():
     cursor.close()
     connection.close()
     return contacts
+
+def get_contact(tax_code):
+    connection = sqlite3.connect(DATABASE)
+    connection.row_factory = sqlite3.Row
+
+    cursor = connection.cursor()
+    cursor.execute('''SELECT first_name, last_name, company_name , tax_code, email, phone
+                   FROM contacts c
+                   JOIN account a
+                   ON c.vat_code = a.vat_code
+                   WHERE tax_code = ?''', (tax_code, ))
+    contact = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+
+    return contact
 
 def view_contact_by_vatcode(vat_Code):
     connection = sqlite3.connect(DATABASE)
@@ -107,3 +124,24 @@ def view_contact_by_vatcode(vat_Code):
                    ORDER BY first_name, last_name ASC''', (vat_Code,))
     contacts = cursor.fetchall()
     return contacts
+
+def delete_account(vat_code):
+    connection = sqlite3.connect(DATABASE)
+
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute('''DELETE FROM account
+                       WHERE vat_code = ? ''', (vat_code,))
+
+        connection.commit()
+    except sqlite3.Error as e:
+        cursor.close()
+        connection.close()
+
+        return '500'
+
+    cursor.close()
+    connection.close()
+
+    return '204'

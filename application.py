@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from markupsafe import escape
-from queries import insert_account, insert_contact, get_accounts, get_contacts, view_contact_by_vatcode
+from queries import insert_account, insert_contact, get_accounts, get_contacts, view_contact_by_vatcode, delete_account, get_contact
 import requests
 import json
 
@@ -86,11 +86,24 @@ def handle_creating_account():
 
     return statusCode
 
+@app.route("/api/delete_account/<string:vat_code>", methods=["DELETE"])
+def handle_deleting_account(vat_code):
+    statusCode = delete_account(vat_code)
+
+    return '204'
+
 @app.route("/contacts")
 def view_contacts():
     contacts = get_contacts()
 
     return render_template("contacts.html", contacts=contacts)
+
+@app.route("/view_details_contact/<string:tax_code>")
+def view_details_contact(tax_code):
+    contact = get_contact(tax_code)
+    print(contact)
+
+    return render_template("view_details_contact.html", contact=contact)
 
 @app.route("/create_contact/<string:vat_code>")
 def create_contact(vat_code):

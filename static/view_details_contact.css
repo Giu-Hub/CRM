@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+#contact-container {
+    width: 45vw;
+    border: .1rem solid rgba(80, 80, 80, .4);
+    border-radius: .5rem;
+    box-shadow: .5rem .5rem .5rem rgba(70, 70, 70, .4);
+    & > ul > li > p {
+        margin: 0;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap;
+    }
+}
+
+ul {
+    width: 95%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+ul > li {
+    width: 49%;
+    display: inline-block;
+    padding: .5vh 0;
+    align-content: center;
+}
+
+ul li > * {
+    width: 95%;
+}

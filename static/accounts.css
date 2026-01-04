@@ -31,7 +31,6 @@ html {
 .account-container {
     border: .1rem solid rgba(80, 80, 80, .4);
     border-radius: .5rem;
-    height: 16vh;
 }
 
 .account-container:hover {
