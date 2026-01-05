@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // document.getElementById("back-arrow").addEventListener("click", () => {
-    //     history.back()
-    // })
+    document.getElementById("back-arrow").addEventListener("click", () => {
+        history.back()
+    })
 
     const accountsToDelete = document.getElementsByClassName("delete-account");
 

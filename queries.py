@@ -1,8 +1,7 @@
 import sqlite3
 from markupsafe import escape
-from datetime import datetime
 
-DATABASE = '../crm.db'
+DATABASE = 'crm.db'
 
 def insert_contact(fields):
     connection = sqlite3.connect(DATABASE)
@@ -11,8 +10,6 @@ def insert_contact(fields):
 
     # https://stackoverflow.com/questions/30039451/sqlite-insert-in-flask
 
-    date = datetime.today().strftime('%Y-%m-%d')
-
     firstName = fields["firstName"]
     lastName = fields["lastName"]
     taxCode = fields["taxCode"]
@@ -20,8 +17,8 @@ def insert_contact(fields):
     phone = fields["phone"]
     vatCode = fields["vatCode"]
     try:
-        cursor.execute('''INSERT INTO contacts (tax_code, first_name, last_name, phone, email, created_date, vat_code) 
-                       VALUES (?, ?, ?, ?, ?, ?, ?)''', (taxCode, firstName, lastName, phone, email, date, vatCode))
+        cursor.execute('''INSERT INTO contacts (tax_code, first_name, last_name, phone, email, vat_code) 
+                       VALUES (?, ?, ?, ?, ?, ?)''', (taxCode, firstName, lastName, phone, email, vatCode))
         
         connection.commit()
     except sqlite3.InterruptedError as e:
@@ -77,6 +74,20 @@ def get_accounts():
 
     return res
 
+def get_account_details(vatCode):
+    connection = sqlite3.connect(DATABASE)
+    connection.row_factory = sqlite3.Row
+    
+    cursor=connection.cursor()
+    cursor.execute('''SELECT *
+                    FROM account
+                    WHERE vat_code = ?
+                    ''', (vatCode,))
+    
+    account = cursor.fetchone()
+
+    return account
+
 def get_contacts():
     connection = sqlite3.connect(DATABASE)
     connection.row_factory = sqlite3.Row
@@ -116,7 +127,7 @@ def view_contact_by_vatcode(vat_Code):
     connection.row_factory = sqlite3.Row
     
     cursor = connection.cursor()
-    cursor.execute('''SELECT first_name, last_name, company_name 
+    cursor.execute('''SELECT first_name, last_name, company_name, tax_code 
                    FROM contacts c
                    JOIN account a
                    ON c.vat_code = a.vat_code
@@ -145,3 +156,31 @@ def delete_account(vat_code):
     connection.close()
 
     return '204'
+
+def get_count_contacts():
+    conn = sqlite3.connect(DATABASE)
+    
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT COUNT(*)
+                  FROM contacts
+                   """)
+
+    counters = cursor.fetchone()
+
+    conn.close()
+    return counters[0] 
+
+def get_count_accounts():
+    conn = sqlite3.connect(DATABASE)
+
+    cursor = conn.cursor()
+    cursor.execute("""  
+      SELECT COUNT(*)
+        FROM account
+                   """,)
+    
+    counters = cursor.fetchone()
+    
+    conn.close()
+    return counters[0]

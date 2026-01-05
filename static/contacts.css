@@ -24,9 +24,9 @@ html {
     gap: 2vh .7vw;
 }
 
-/* #back-arrow:hover {
+#back-arrow:hover {
     cursor: pointer;
-} */
+}
 
 .contact-container {
     border: .1rem solid rgba(80, 80, 80, .4);

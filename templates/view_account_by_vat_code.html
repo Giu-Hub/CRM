@@ -2,10 +2,28 @@
 <html lang="en">
 <head>
     <title>CRM</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='view_account.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='view_details_account.css') }}">
 </head>
 <body>
-    {{ account['name'] }}
-    {{ account['vat_code'] }}
+    <div id="account-container">
+        <ul>
+            <li>
+                <label for="vat-code">Vat code</label>
+                <p>{{ account['vat_code'] }}</p>
+            </li>
+            <li>
+                <label for="company-name">Company Name</label>
+                <p>{{ account['company_name'] | safe}}</p>
+            </li>
+            <li>
+                <label for="street-name">Street name</label>
+                <p>{{ account['street_name'] | safe}}</p>
+            </li>
+            <li>
+                <label for="region">region</label>
+                <p>{{ account['region'] }}</p>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>

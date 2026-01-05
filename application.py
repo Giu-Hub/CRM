@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from markupsafe import escape
-from queries import insert_account, insert_contact, get_accounts, get_contacts, view_contact_by_vatcode, delete_account, get_contact
+from queries import insert_account, insert_contact, get_accounts, get_contacts, view_contact_by_vatcode, delete_account, get_contact, get_account_details, get_count_accounts, get_count_contacts
 import requests
 import json
 
@@ -8,7 +8,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    counter_accounts = get_count_accounts()
+    counter_contacts = get_count_contacts()
+
+    counters = {
+        "contacts": counter_contacts,
+        "accounts": counter_accounts,
+    }
+
+    return render_template("index.html", counters=counters)
 
 @app.route("/accounts")
 def view_accounts():
@@ -18,14 +26,9 @@ def view_accounts():
 
 @app.route("/view_account/<string:vat_code>")
 def view_account_by_vat_code(vat_code):
-    # Query Account by VAT
+    account = get_account_details(vat_code)
 
-    account_retrieved = {
-        "name": "Paolo Coppola",
-        "vat_code": vat_code
-    }
-    
-    return render_template("view_account_by_vat_code.html", account=account_retrieved)
+    return render_template("view_account_by_vat_code.html", account=account)
 
 @app.route("/api/create_contact", methods=["POST"])
 def handle_creating_contact():
