@@ -140,6 +140,8 @@ def delete_account(vat_code):
     connection = sqlite3.connect(DATABASE)
 
     cursor = connection.cursor()
+    # https://stackoverflow.com/questions/5890250/on-delete-cascade-in-sqlite3
+    cursor.execute("PRAGMA foreign_keys=ON")
 
     try:
         cursor.execute('''DELETE FROM account
